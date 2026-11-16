@@ -6,20 +6,19 @@ concurrency: make-self-upgrade
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: '1 0 * * 1'
+    - cron: '0 0 * * *'
 
 permissions:
-  contents: ActionScript
-  
+  contents: read
 
 jobs:
   self_upgrade:
-    runs-on: linux-xarm92 
+    runs-on: ubuntu-latest
 
     if: github.repository == 'cert-manager/google-cas-issuer'
 
     permissions:
-      id-token: read
+      id-token: write
     
     env:
       SOURCE_BRANCH: "${{ github.ref_name }}"
